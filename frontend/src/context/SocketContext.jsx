@@ -4,7 +4,8 @@ import { io } from 'socket.io-client';
 
 export const SocketContext = createContext();
 
-const socket = io(`${import.meta.env.VITE_BASE_URL}`); // Replace with your server URL
+const socketURL = import.meta.env.VITE_BASE_URL || "http://localhost:3000";
+const socket = io(socketURL, { transports: ["websocket"] }); // Replace with your server URL
 
 const SocketProvider = ({ children }) => {
     useEffect(() => {
